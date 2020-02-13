@@ -79,8 +79,8 @@
 		width: 130px;
 		margin-left: auto;
   		margin-right: auto;
-		margin-top: 15px;
-		margin-bottom: 20px;
+		margin-top: 20px;
+		margin-bottom: 25px;
 	}
 	.sections {
 		display: flex;
