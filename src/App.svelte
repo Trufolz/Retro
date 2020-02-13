@@ -47,7 +47,7 @@
 
 	function copyItemsHandler(event) {
 		const result = [];
-		result.push(`Retro ${getToday}'\n''\n'`);
+		result.push(`Retro ${getToday()}\n\n`);
 		sections.forEach(section => {
 			const sectionItems = items.filter(i => i.section === section);
 			if (sectionItems.length > 0) {
@@ -61,7 +61,7 @@
 
 	function getToday() {
 		const today = new Date();
-		return today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+		return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
 	}
 </script>
 
