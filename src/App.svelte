@@ -47,7 +47,7 @@
 
 	function copyItemsHandler(event) {
 		const result = [];
-		result.push(`Retro ${getToday()}\n\n`);
+		result.push(`Retro ${getToday()}\n`);
 		sections.forEach(section => {
 			const sectionItems = items.filter(i => i.section === section);
 			if (sectionItems.length > 0) {
