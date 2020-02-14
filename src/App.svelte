@@ -17,6 +17,10 @@
 		{
 			id: 3,
 			name: 'Action'
+		},
+		{
+			id: 4,
+			name: 'Regression Directors'
 		}
 	];
 	let items = [];
