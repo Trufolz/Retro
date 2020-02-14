@@ -1,5 +1,6 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import { slide } from 'svelte/transition';
 
     export let sections;
 
@@ -7,9 +8,9 @@
     let disableButton = !inputValue;
 
     const dispatch = createEventDispatcher();
-    function handleAddItem(event) {
+    function handleAddItem(event, sectionId) {
         dispatch('addItem', {
-            section: event.target.innerText,
+            sectionId,
             id: undefined,
             value: inputValue
         });
@@ -23,22 +24,31 @@
     function handleCopyItems(event) {
         dispatch('copyItems');
     }
+
+    function handleAddSection(event) {
+        dispatch('addSection');
+    }
 </script>
 
 <div class="toolbar">
     <div>
-        <button on:click={handleClearItems} class="pill-button pill-button--retro-opposite">
+        <button on:click={handleClearItems} class="pill-button pill-button--retro-opposite" title="Clear all">
             <i class="fa fa-trash-o"></i>
         </button>
-        <button on:click={handleCopyItems} class="pill-button pill-button--retro-opposite">
+        <button on:click={handleCopyItems} class="pill-button pill-button--retro-opposite" title="Copy results">
             <i class="fa fa-copy"></i>
         </button>
+        <button on:click={handleAddSection} class="pill-button pill-button--retro-opposite" title="Add a new section">
+            <i class="fa fa-plus"></i>
+        </button>
     </div>
-    <input bind:value={inputValue} placeholder="Any ideas?"/>
+    {#if sections.length !== 0}
+        <input transition:slide|local bind:value={inputValue} placeholder="Any ideas?"/>
+    {/if}
     <div>
-        {#each sections as section}
-            <button on:click={handleAddItem} disabled={!inputValue} class="pill-button pill-button--retro">
-                {section}
+        {#each sections as section (section.id)}
+            <button transition:slide|local on:click={(event, id) => handleAddItem(event, section.id)} disabled={!inputValue} class="pill-button pill-button--retro">
+                {section.name}
             </button>
         {/each}
     </div>
@@ -119,9 +129,8 @@
         }
 
         &--retro {
-            width: 100px;
             min-width: 100px;
-            height: 50px;
+            max-height: 50px;
             min-height: 50px;
             color: #fff;
             background-color: #7a1de0;
@@ -135,8 +144,11 @@
         }
 
         &--retro-opposite {
-            width: 50px;
             min-width: 50px;
+            max-width: 50px;
+            min-height: 50px;
+            max-height: 50px;
+            font-size: 25px;
             color: #fff;
             background-color: #d25577;
             border-color: #d25577;
