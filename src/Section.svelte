@@ -23,6 +23,9 @@
         {section.name} 
         <i on:click={(event, id) => removeSection(event, section.id)} class="fa fa-trash-o" title="Remove section"></i>
     </p>
+    {#if items.length === 0 }
+        <div class="empty-section">I'm empty!</div>
+    {/if}
     {#each items as item (item.id)}
         <div transition:slide|local>
             <span>
@@ -56,6 +59,10 @@
     }
     .section {
         width: 30em;
+    }
+    .empty-section {
+        color: #e1e1e1;
+        font-style: italic;
     }
     .fa-trash-o {
         margin-left: 5px;
