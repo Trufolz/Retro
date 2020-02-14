@@ -55,12 +55,7 @@
         margin: 0 0 0.5em 0;
     }
     .section {
-        padding: 3em;
-        /* flex-basis: 30em;
-        flex-grow: 0;
-        flex-shrink: 0;
-        overflow: hidden; */
-        flex: 1
+        width: 30em;
     }
     .fa-trash-o {
         margin-left: 5px;
