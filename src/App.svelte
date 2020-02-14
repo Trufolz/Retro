@@ -42,7 +42,7 @@
 				localStorageItems.push(JSON.parse(data));
 			}
 		}
-		items = localStorageItems;
+		items = localStorageItems.sort((i1, i2) => i1.id - i2.id);
 	}
 
 	const getSections = () => {
@@ -53,11 +53,14 @@
 				localStorageSections.push(JSON.parse(data));
 			}
 		}
-		sections = localStorageSections;
 
-		if (sections.length === 0) {
+		sections = localStorageSections.sort((s1, s2) => s1.id - s2.id);;
+
+		if (localStorageSections.length === 0) {
 			defaultSections.forEach(s => addSection(s.id, s.name));
 		}
+
+		sections = sections.sort((s1, s2) => s1.id - s2.id);
 	}
 
 	function addItemHandler(event) {
