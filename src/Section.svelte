@@ -2,30 +2,37 @@
     import { createEventDispatcher } from 'svelte';
     import { slide } from 'svelte/transition';
 
-    export let title;
+    export let section;
     export let items = [];
 
     let dispatch = createEventDispatcher();
     function removeItem(event, id) {
         dispatch('removeItem', {
-            id,
-            section: title
+            id
+        });
+    }
+    function removeSection(event, id) {
+        dispatch('removeSection', {
+            id
         });
     }
 </script>
 
 <div class="section">
-    <p>{title}</p>
-        {#each items as item (item.id)}
-            <div transition:slide|local>
-                <span>
-                    {item.value}
-                </span>
-                <span>
-                    <i on:click={(event, id) => removeItem(event, item.id)} class="fa fa-trash-o"></i>
-                </span>
-            </div>
-        {/each}
+    <p>
+        {section.name} 
+        <i on:click={(event, id) => removeSection(event, section.id)} class="fa fa-trash-o" title="Remove section"></i>
+    </p>
+    {#each items as item (item.id)}
+        <div transition:slide|local>
+            <span>
+                {item.value}
+            </span>
+            <span>
+                <i on:click={(event, id) => removeItem(event, item.id)} class="fa fa-trash-o"></i>
+            </span>
+        </div>
+    {/each}
 </div>
 
 <style>
@@ -33,6 +40,15 @@
         font-size: 40px;
         font-family: 'Galada';
         color: #7a1de0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    p .fa-trash-o {
+        font-size: 25px;
+        margin-left: 10px;
+        margin-bottom: 10px;
     }
     div {
         padding: 0.4em;
@@ -40,10 +56,11 @@
     }
     .section {
         padding: 3em;
-        flex-basis: 30em;
+        /* flex-basis: 30em;
         flex-grow: 0;
         flex-shrink: 0;
-        overflow: hidden;
+        overflow: hidden; */
+        flex: 1
     }
     .fa-trash-o {
         margin-left: 5px;
