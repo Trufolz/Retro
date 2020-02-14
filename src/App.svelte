@@ -160,5 +160,11 @@
 		display: flex;
 		justify-content: center;
 		text-align: center;
+		flex-wrap: wrap;
+	}
+	@media screen and (max-width: 600px) {
+		.sections {
+			display: block;
+		}
 	}
 </style>
